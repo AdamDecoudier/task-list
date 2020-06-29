@@ -96,7 +96,7 @@ public final class TaskList implements Runnable {
             out.println();
             return;
         }
-        projectTasks.add(new Task(nextId(), description, false));
+        projectTasks.add(new Task(++lastId, description, false));
     }
 
     private void check(String idString) {
@@ -134,9 +134,5 @@ public final class TaskList implements Runnable {
     private void error(String command) {
         out.printf("I don't know what the command \"%s\" is.", command);
         out.println();
-    }
-
-    private long nextId() {
-        return ++lastId;
     }
 }
