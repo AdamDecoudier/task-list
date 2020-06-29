@@ -102,6 +102,7 @@ public final class TaskList implements Runnable {
         }
     }
 
+    //add project
     private void addProject(String name) {
         tasks.put(name, new ArrayList<Task>());
     }
