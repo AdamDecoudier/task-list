@@ -10,7 +10,7 @@ public class DeadlineTest {
 
     @Test
     public void getIdTest(){
-        Deadline deadline = new Deadline;
+        Deadline deadline = new Deadline();
         deadline.setId(1L);
         assertEquals(1L, deadline.getId());
     }
