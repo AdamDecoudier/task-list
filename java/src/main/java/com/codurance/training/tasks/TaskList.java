@@ -50,7 +50,7 @@ public final class TaskList implements Runnable {
                 showProject();
                 break;
             case "add":
-                add(commandRest[1]);
+                chooseAdd(commandRest[1]);
                 break;
             case "check":
                 setDone(commandRest[1], true);
@@ -77,7 +77,7 @@ public final class TaskList implements Runnable {
         }
     }
 
-    private void add(String commandLine) {
+    private void chooseAdd(String commandLine) {
         String[] subcommandRest = commandLine.split(" ", 2);
         String subcommand = subcommandRest[0];
         if (subcommand.equals("project")) {
