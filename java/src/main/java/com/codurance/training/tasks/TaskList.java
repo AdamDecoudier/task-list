@@ -10,12 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 public final class TaskList implements Runnable {
-    private static final String QUIT = "quit";
-    private static final String SHOW = "show";
-    private static final String ADD = "add";
-    private static final String CHECK = "check";
-    private static final String UNCHECK = "uncheck";
-    private static final String HELP = "help";
 
     private final Map<String, List<Task>> tasks = new LinkedHashMap<>();
     private final BufferedReader in;
@@ -38,7 +32,7 @@ public final class TaskList implements Runnable {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            if (command.equals(QUIT)) {
+            if (command.equals("quit")) {
                 break;
             }
             execute(command);
@@ -49,19 +43,19 @@ public final class TaskList implements Runnable {
         String[] commandRest = commandLine.split(" ", 2);
         String command = commandRest[0];
         switch (command) {
-            case SHOW:
+            case "show":
                 show();
                 break;
-            case ADD:
+            case "add":
                 add(commandRest[1]);
                 break;
-            case CHECK:
+            case "check":
                 check(commandRest[1]);
                 break;
-            case UNCHECK:
+            case "uncheck":
                 uncheck(commandRest[1]);
                 break;
-            case HELP:
+            case "help":
                 help();
                 break;
             default:
