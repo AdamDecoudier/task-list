@@ -1,13 +1,12 @@
 package com.codurance.training.tasks;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public final class TaskList implements Runnable {
 
@@ -16,6 +15,7 @@ public final class TaskList implements Runnable {
     private final PrintWriter out;
 
     private long lastId = 0;
+    private long lastDeadlineId = 0;
 
     //init reader and writer
     public TaskList(BufferedReader reader, PrintWriter writer) {
@@ -37,12 +37,16 @@ public final class TaskList implements Runnable {
             if (command.equals("quit")) {
                 break;
             }
-            execute(command);
+            try {
+                execute(command);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     //Method use to choose command
-    private void execute(String commandLine) {
+    private void execute(String commandLine) throws ParseException {
         String[] commandRest = commandLine.split(" ", 2);
         String command = commandRest[0];
         switch (command) {
@@ -79,14 +83,14 @@ public final class TaskList implements Runnable {
     }
 
     //choose the right command add
-    private void chooseAdd(String commandLine) {
+    private void chooseAdd(String commandLine) throws ParseException {
         String[] subcommandRest = commandLine.split(" ", 2);
         String subcommand = subcommandRest[0];
         if (subcommand.equals("project")) {
             addProject(subcommandRest[1]);
         } else if (subcommand.equals("task")) {
-            String[] projectTask = subcommandRest[1].split(" ", 2);
-            addTask(projectTask[0], projectTask[1]);
+            String[] projectTask = subcommandRest[1].split(" ", 3);
+            addTask(projectTask[0], projectTask[1], projectTask[2]);
         }
     }
 
@@ -94,14 +98,16 @@ public final class TaskList implements Runnable {
         tasks.put(name, new ArrayList<Task>());
     }
 
-    private void addTask(String project, String description) {
+    private void addTask(String project, String description, String date) throws ParseException {
         List<Task> projectTasks = tasks.get(project);
         if (projectTasks == null) {
             out.printf("Could not find a project with the name \"%s\".", project);
             out.println();
             return;
         }
-        projectTasks.add(new Task(++lastId, description, false));
+        Date deadLineDate = new SimpleDateFormat("yyyy/MM/dd").parse(date);
+        Deadline deadline = new Deadline(++lastId, deadLineDate);
+        projectTasks.add(new Task(++lastId, description, false, deadline));
     }
 
     private void setDone(String idString, boolean done) {
@@ -123,7 +129,7 @@ public final class TaskList implements Runnable {
         out.println("Commands:");
         out.println("  show");
         out.println("  add project <project name>");
-        out.println("  add task <project name> <task description>");
+        out.println("  add task <project name> <task description> <task deadline YYYY/MM/DD>");
         out.println("  check <task ID>");
         out.println("  uncheck <task ID>");
         out.println();
