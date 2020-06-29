@@ -50,10 +50,10 @@ public final class TaskList implements Runnable {
                 add(commandRest[1]);
                 break;
             case "check":
-                check(commandRest[1]);
+                setDone(commandRest[1], true);
                 break;
             case "uncheck":
-                uncheck(commandRest[1]);
+                setDone(commandRest[1], false);
                 break;
             case "help":
                 help();
@@ -97,14 +97,6 @@ public final class TaskList implements Runnable {
             return;
         }
         projectTasks.add(new Task(++lastId, description, false));
-    }
-
-    private void check(String idString) {
-        setDone(idString, true);
-    }
-
-    private void uncheck(String idString) {
-        setDone(idString, false);
     }
 
     private void setDone(String idString, boolean done) {
