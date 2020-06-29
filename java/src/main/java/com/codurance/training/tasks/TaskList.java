@@ -47,7 +47,7 @@ public final class TaskList implements Runnable {
         String command = commandRest[0];
         switch (command) {
             case "show":
-                show();
+                showProject();
                 break;
             case "add":
                 add(commandRest[1]);
@@ -67,7 +67,7 @@ public final class TaskList implements Runnable {
         }
     }
 
-    private void show() {
+    private void showProject() {
         for (Map.Entry<String, List<Task>> project : tasks.entrySet()) {
             out.println(project.getKey());
             for (Task task : project.getValue()) {
