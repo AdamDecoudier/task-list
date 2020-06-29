@@ -75,7 +75,11 @@ public final class TaskList implements Runnable {
         for (Map.Entry<String, List<Task>> project : tasks.entrySet()) {
             out.println(project.getKey());
             for (Task task : project.getValue()) {
-                out.printf("    [%c] %d: %s %s%n", (task.isDone() ? 'x' : ' '), task.getId(), task.getDescription(), task.getDeadline().getDate().toString());
+                String deadline = "";
+                if(task.getDeadline() != null){
+                    deadline = task.getDeadline().getDate().toString();
+                }
+                out.printf("    [%c] %d: %s %s%n", (task.isDone() ? 'x' : ' '), task.getId(), task.getDescription(), deadline);
             }
             out.println();
         }
@@ -89,7 +93,12 @@ public final class TaskList implements Runnable {
             addProject(subcommandRest[1]);
         } else if (subcommand.equals("task")) {
             String[] projectTask = subcommandRest[1].split(" ", 3);
-            addTask(projectTask[0], projectTask[1], projectTask[2]);
+            if(projectTask.length == 3){
+                addTask(projectTask[0], projectTask[1], projectTask[2]);
+            }else{
+                addTask(projectTask[0], projectTask[1], null);
+            }
+
         }
     }
 
@@ -104,8 +113,14 @@ public final class TaskList implements Runnable {
             out.println();
             return;
         }
-        Date deadLineDate = new SimpleDateFormat("yyyy/MM/dd").parse(date);
-        Deadline deadline = new Deadline(++lastId, deadLineDate);
+        Deadline deadline;
+        if( date != null){
+            Date deadLineDate = new SimpleDateFormat("yyyy/MM/dd").parse(date);
+            deadline = new Deadline(++lastId, deadLineDate);
+        }else{
+            deadline = null;
+        }
+
         projectTasks.add(new Task(++lastId, description, false, deadline));
     }
 
