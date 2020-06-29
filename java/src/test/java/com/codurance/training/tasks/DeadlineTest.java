@@ -1,6 +1,9 @@
 package com.codurance.training.tasks;
 
 import org.junit.Test;
+
+import java.util.Date;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DeadlineTest {
@@ -14,8 +17,5 @@ public class DeadlineTest {
 
     @Test
     public void getDateTest(){
-        Deadline deadline = new Deadline;
-        deadline.setDate(1L);
-        assertEquals(1L, deadline.getDate());
     }
 }
