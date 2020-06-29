@@ -78,6 +78,7 @@ public final class TaskList implements Runnable {
         }
     }
 
+    //choose the right command add
     private void chooseAdd(String commandLine) {
         String[] subcommandRest = commandLine.split(" ", 2);
         String subcommand = subcommandRest[0];
@@ -102,6 +103,7 @@ public final class TaskList implements Runnable {
         }
         projectTasks.add(new Task(++lastId, description, false));
     }
+
 
     private void setDone(String idString, boolean done) {
         int id = Integer.parseInt(idString);
