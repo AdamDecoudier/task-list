@@ -22,6 +22,7 @@ public final class TaskList implements Runnable {
         this.out = writer;
     }
 
+    //Method run until "quit"
     public void run() {
         while (true) {
             out.print("> ");
@@ -39,6 +40,7 @@ public final class TaskList implements Runnable {
         }
     }
 
+    //Method use to choose command
     private void execute(String commandLine) {
         String[] commandRest = commandLine.split(" ", 2);
         String command = commandRest[0];
