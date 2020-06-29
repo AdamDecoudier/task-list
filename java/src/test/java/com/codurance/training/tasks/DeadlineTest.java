@@ -15,6 +15,8 @@ public class DeadlineTest {
         assertEquals(new Date(2020,06,29), deadline.getDate());
     }
 
+
+
     @Test
     public void getIdTest(){
         Deadline deadline = new Deadline();

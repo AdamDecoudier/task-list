@@ -14,6 +14,14 @@ public class TaskTest {
         assertEquals(1L, task.getId());
         assertEquals("test", task.getDescription());
         assertEquals(true, task.isDone());
+
+        Date date = new Date(2020,06,29);
+        Task task2 = new Task(1L, "test", true, new Deadline(1L, date));
+        assertEquals(1L, task2.getId());
+        assertEquals("test", task2.getDescription());
+        assertEquals(true, task2.isDone());
+        assertEquals(new Deadline(1L, date).getId(), task2.getDeadline().getId());
+        assertEquals(new Deadline(1L, date).getDate(), task2.getDeadline().getDate());
     }
 
     @Test

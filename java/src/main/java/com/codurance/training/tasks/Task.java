@@ -12,6 +12,13 @@ public final class Task {
         this.done = done;
     }
 
+    public Task(long id, String description, boolean done, Deadline deadline) {
+        this.id = id;
+        this.description = description;
+        this.done = done;
+        this.deadline = deadline;
+    }
+
     public long getId() {
         return id;
     }

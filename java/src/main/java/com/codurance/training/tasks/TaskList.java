@@ -104,7 +104,6 @@ public final class TaskList implements Runnable {
         projectTasks.add(new Task(++lastId, description, false));
     }
 
-
     private void setDone(String idString, boolean done) {
         int id = Integer.parseInt(idString);
         for (Map.Entry<String, List<Task>> project : tasks.entrySet()) {
