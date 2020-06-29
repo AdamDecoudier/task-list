@@ -14,5 +14,27 @@ public class TaskTest {
     }
 
     @Test
-    
+    public void getIdTest(){
+        Task task = new Task(1L, "test", true);
+        assertEquals(1L, task.getId());
+    }
+
+    @Test
+    public void getDescriptionTest(){
+        Task task = new Task(1L, "test", true);
+        assertEquals("test", task.getDescription());
+    }
+
+    @Test
+    public void isDoneTest(){
+        Task task = new Task(1L, "test", true);
+        assertEquals(true, task.isDone());
+    }
+
+    @Test
+    public void setDoneTest(){
+        Task task = new Task(1L, "test", true);
+        task.setDone(false);
+        assertEquals(false, task.isDone());
+    }
 }
