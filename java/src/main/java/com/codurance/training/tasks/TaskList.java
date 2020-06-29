@@ -11,6 +11,11 @@ import java.util.Map;
 
 public final class TaskList implements Runnable {
     private static final String QUIT = "quit";
+    private static final String SHOW = "show";
+    private static final String ADD = "add";
+    private static final String CHECK = "check";
+    private static final String UNCHECK = "uncheck";
+    private static final String HELP = "help";
 
     private final Map<String, List<Task>> tasks = new LinkedHashMap<>();
     private final BufferedReader in;
@@ -44,19 +49,19 @@ public final class TaskList implements Runnable {
         String[] commandRest = commandLine.split(" ", 2);
         String command = commandRest[0];
         switch (command) {
-            case "show":
+            case SHOW:
                 show();
                 break;
-            case "add":
+            case ADD:
                 add(commandRest[1]);
                 break;
-            case "check":
+            case CHECK:
                 check(commandRest[1]);
                 break;
-            case "uncheck":
+            case UNCHECK:
                 uncheck(commandRest[1]);
                 break;
-            case "help":
+            case HELP:
                 help();
                 break;
             default:
