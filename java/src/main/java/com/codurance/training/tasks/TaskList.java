@@ -17,6 +17,7 @@ public final class TaskList implements Runnable {
 
     private long lastId = 0;
 
+    //init reader and writer
     public TaskList(BufferedReader reader, PrintWriter writer) {
         this.in = reader;
         this.out = writer;
@@ -115,6 +116,7 @@ public final class TaskList implements Runnable {
         out.println();
     }
 
+    //Show commands
     private void help() {
         out.println("Commands:");
         out.println("  show");
@@ -125,6 +127,7 @@ public final class TaskList implements Runnable {
         out.println();
     }
 
+    //Show Error if command doesn't exist
     private void error(String command) {
         out.printf("I don't know what the command \"%s\" is.", command);
         out.println();
