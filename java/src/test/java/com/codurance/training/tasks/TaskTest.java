@@ -1,6 +1,9 @@
 package com.codurance.training.tasks;
 
 import org.junit.Test;
+
+import java.util.Date;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskTest {
@@ -36,5 +39,11 @@ public class TaskTest {
         Task task = new Task(1L, "test", true);
         task.setDone(false);
         assertEquals(false, task.isDone());
+    }
+
+    @Test
+    public void getDeadline(){
+        Task task = new Task(1L, "test", true);
+        task.setDeadline(new Deadline(1L, new Date(2020, 06, 29 )));
     }
 }

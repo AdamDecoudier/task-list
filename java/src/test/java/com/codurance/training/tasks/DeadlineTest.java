@@ -9,6 +9,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DeadlineTest {
 
     @Test
+    public void constructorTest(){
+        Deadline deadline = new Deadline(1L, new Date(2020,06,29));
+        assertEquals(1L, deadline.getId());
+        assertEquals(new Date(2020,06,29), deadline.getDate());
+    }
+
+    @Test
     public void getIdTest(){
         Deadline deadline = new Deadline();
         deadline.setId(1L);
