@@ -8,6 +8,14 @@ public class Deadline {
 
     private Date date;
 
+    public Deadline(){
+    }
+
+    public Deadline(Long id, Date date){
+        this.id = id;
+        this.date = date;
+    }
+
     public Long getId() {
         return id;
     }
